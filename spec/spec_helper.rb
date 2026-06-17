@@ -62,10 +62,6 @@ class MobilityRansackTest < ActiveRecord::Migration[ENV['RAILS_VERSION'].to_f]
       t.string :tags
     end
 
-    create_table :articles do |t|
-      t.json :translations, default: {}
-    end
-
     create_table :mobility_string_translations do |t|
       t.string  :locale
       t.string  :key
@@ -115,15 +111,6 @@ class Post < ActiveRecord::Base
 
   def self.ransackable_associations(auth_object = nil)
     %w[mobility_string_translations mobility_text_translations author]
-  end
-end
-
-class Article < ActiveRecord::Base
-  extend Mobility
-  translates :name, backend: :container
-
-  def self.ransackable_attributes(auth_object = nil)
-    %w[name name_en name_ja]
   end
 end
 

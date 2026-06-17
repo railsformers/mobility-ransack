@@ -89,10 +89,8 @@ RSpec.describe Mobility::Plugins::Ransack do
     end
   end
 
-  context 'container backend' do
-    it 'registers locale-specific ransackers' do
-      expect(Article._ransackers.keys).to include('name', 'name_en', 'name_ja')
-    end
+  it 'registers locale-specific ransackers' do
+    expect(Post._ransackers.keys).to include('title', 'title_en', 'title_ja')
   end
 
   it 'handles grouping search with translated fields with associations' do
