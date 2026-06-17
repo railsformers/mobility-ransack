@@ -13,6 +13,7 @@ ENV['RAILS_VERSION'] ||= "5.2"
 ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: ':memory:'
 
 I18n.enforce_available_locales = false
+I18n.available_locales = [:en, :ja]
 
 RSpec.configure do |config|
   config.filter_run focus: true
@@ -61,6 +62,10 @@ class MobilityRansackTest < ActiveRecord::Migration[ENV['RAILS_VERSION'].to_f]
       t.string :tags
     end
 
+    create_table :articles do |t|
+      t.json :translations, default: {}
+    end
+
     create_table :mobility_string_translations do |t|
       t.string  :locale
       t.string  :key
@@ -90,7 +95,7 @@ class Author < ActiveRecord::Base
   translates :website, type: :string
 
   def self.ransackable_attributes(auth_object = nil)
-    %w[website]
+    %w[website website_en website_ja]
   end
 
   def self.ransackable_associations(auth_object = nil)
@@ -105,11 +110,20 @@ class Post < ActiveRecord::Base
   belongs_to :author, optional: true
 
   def self.ransackable_attributes(auth_object = nil)
-    %w[title content tags]
+    %w[title content tags title_en title_ja content_en content_ja]
   end
 
   def self.ransackable_associations(auth_object = nil)
     %w[mobility_string_translations mobility_text_translations author]
+  end
+end
+
+class Article < ActiveRecord::Base
+  extend Mobility
+  translates :name, backend: :container
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name name_en name_ja]
   end
 end
 
