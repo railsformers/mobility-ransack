@@ -6,10 +6,9 @@ require "mobility"
 require "mobility/ransack"
 require "pry"
 
-require "database_cleaner"
+require "database_cleaner/active_record"
 DatabaseCleaner.strategy = :transaction
 
-ENV['RAILS_VERSION'] ||= "5.2"
 ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: ':memory:'
 
 I18n.enforce_available_locales = false
@@ -48,7 +47,7 @@ Mobility.configure do |config|
   end
 end
 
-class MobilityRansackTest < ActiveRecord::Migration[ENV['RAILS_VERSION'].to_f]
+class MobilityRansackTest < ActiveRecord::Migration[ActiveRecord::VERSION::STRING.to_f]
   def self.up
     create_table :authors do
     end

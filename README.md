@@ -1,5 +1,4 @@
-Mobility Ransack
-================
+# Mobility Ransack
 
 [![Gem Version](https://badge.fury.io/rb/mobility-ransack.svg)][gem]
 [![Build Status](https://github.com/shioyama/mobility-ransack/workflows/CI/badge.svg)][actions]
@@ -18,7 +17,7 @@ Search on translated attributes with
 Just add the gem to your Gemfile:
 
 ```ruby
-gem 'mobility-ransack', '~> 1.2.2'
+gem 'mobility-ransack', github: 'railsformers/mobility-ransack'
 ```
 
 Now enable the `ransack` plugin in Mobility's configuration:

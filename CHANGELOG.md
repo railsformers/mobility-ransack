@@ -1,6 +1,13 @@
 # Mobility Ransack Changelog
 
-## 1.1
+## 1.3
+
+### 1.3.0
+- Support direct locale accessors in Ransack queries (e.g. `title_en_cont`)
+- Support Ransack 5.0 and 6.0
+- Test against Ruby 3.2–4.0 and Rails 7.2–8.1
+
+## 1.2
 
 ### 1.2.2
 - Support Ransack 4.0
